@@ -10,20 +10,22 @@ csvpath = os.path.join('Resources', 'budget_data.csv')
 with open(csvpath, 'r') as csvfile:
     csvreader = csv.reader(csvfile)
 
-    # Read the header row
-    csv_header = next(csvreader)
+    
 
     # Initialize variables for total months, total profit, and max and min profit
     total_months = 0
     total_profit_losses = 0
     change_in_profit_losses = 0
     list_profit_losses = []
+    previous_profit_loss_row = 0
     average_change_in_profit_losses = 0
-    current_profit_loss_row = 0
-    greatest_increase_profit_loss = ["",0]
-    greatest_decrease_profit_loss = ["",9999999999999999999]
+    greatest_increase_profit_loss = ["", 0]
+    greatest_decrease_profit_loss = ["", 999999999999999]
+    
+    #Read the header row
+    csv_header = next(csvreader)
 
-    # Get the profit loss from the second row (the first row is the header)
+    #Read the first row to get the initial profit loss
     previous_profit_loss_row = int(next(csvreader)[1])
 
     # Loop through each row in the CSV file
@@ -31,17 +33,17 @@ with open(csvpath, 'r') as csvfile:
 
         #Total months count
         total_months = total_months + 1
-
+    
         #calculate total profit loss
         total_profit_losses = total_profit_losses + int(row[1])
 
-            #Calculate the change in profit loss for each month
+        #Calculate the change in profit loss for each month
         change_in_profit_losses = int(row[1]) - previous_profit_loss_row
         previous_profit_loss_row = int(row[1])
            
-            #Add the change in profit loss to the list
+        #Add the change in profit loss to the list
         list_profit_losses.append(change_in_profit_losses)
-        
+
         #Find the greatest increase in profits 
         if change_in_profit_losses > greatest_increase_profit_loss[1]:
             greatest_increase_profit_loss = [row[0], change_in_profit_losses]
@@ -50,12 +52,9 @@ with open(csvpath, 'r') as csvfile:
         if change_in_profit_losses < greatest_decrease_profit_loss[1]:
             greatest_decrease_profit_loss = [row[0], change_in_profit_losses]
         
-    
+        
     # Calculate the average change in profit loss
     average_change_in_profit_losses = sum(list_profit_losses) / len(list_profit_losses)
-
-        #Find the greatest increase in profits 
-        
 
     #Print the results
     print("Financial Analysis")
