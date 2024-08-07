@@ -2,7 +2,7 @@
 import os
 import csv
 
-csvpath = os.path.join('..','Resources', 'election_data.csv')
+csvpath = os.path.join('Resources', 'election_data.csv')
 
 # Read the CSV file
 with open(csvpath) as csvfile:
@@ -49,7 +49,8 @@ with open(csvpath) as csvfile:
     print("-------------------------")
 
 #set as text file
-with open('election_results.txt', 'w') as text_file:
+txtpath ='Analysis/election_results.txt'
+with open(txtpath, 'w') as text_file:
     text_file.write("Election Results\n")
     text_file.write("-------------------------\n")
     text_file.write(f"Total Votes: {total_votes}\n")
