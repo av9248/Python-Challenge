@@ -4,6 +4,7 @@ import os
 #Module for reading CSV files
 import csv
 
+# Path to the CSV file
 csvpath = os.path.join('Resources', 'budget_data.csv')
 
 with open(csvpath, 'r') as csvfile:
@@ -21,7 +22,7 @@ with open(csvpath, 'r') as csvfile:
     
     #Read the first row to get the initial profit loss
     previous_profit_loss_row = int(next(csvreader)[1])
-    total_profit_losses = previous_profit_loss_row
+    total_profit_losses = previous_profit_loss_row # This is the initial profit loss
 
     # Loop through each row in the CSV file
     for row in csvreader:
